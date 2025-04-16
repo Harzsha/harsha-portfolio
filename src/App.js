@@ -1,3 +1,4 @@
+import About from "./components/About";
 import Home from "./components/Home";
 
 const App = () => {
@@ -19,8 +20,11 @@ const App = () => {
       </div>
 
       {/* Push the content below the fixed navbar */}
-      <div className="pt-20">
+      <div className="h-screen">
         <Home />
+      </div>
+      <div className="h-screen">
+        <About />
       </div>
     </div>
   );

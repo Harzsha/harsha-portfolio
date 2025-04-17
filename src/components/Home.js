@@ -1,4 +1,26 @@
+import React, { useState, useEffect } from "react";
+
 const Home = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Handle scroll event to show/hide the button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setIsVisible(true); // Show button if scrolled down 200px
+      } else {
+        setIsVisible(false); // Hide button if at the top
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="relative isolate px-6 pt-32 pb-20 h-screen flex items-center justify-center text-center bg-white overflow-hidden">
       {/* Background Blobs */}
@@ -50,6 +72,17 @@ const Home = () => {
           </a>
         </div>
       </div>
+
+      {/* Back to Top Button */}
+      {isVisible && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-10 right-10 bg-indigo-600 text-white rounded-full p-4 shadow-lg hover:bg-indigo-700 transition transform hover:scale-105 animate-bounce"
+        >
+          {/* Arrow Up Icon */}
+          <span className="text-2xl font-bold">↑</span>
+        </button>
+      )}
     </div>
   );
 };

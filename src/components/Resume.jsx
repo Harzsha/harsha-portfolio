@@ -48,17 +48,20 @@ const Resume = () => {
     ];
 
     return (
-        <section id="resume" className="min-h-screen py-20 px-6 bg-white">
-            <div className="max-w-4xl mx-auto">
-                <h2 className="text-4xl font-bold text-center text-indigo-800 mb-10">Resume</h2>
+        <section id="resume" className="min-h-screen py-20 px-6 bg-gradient-to-br from-indigo-50 to-purple-100">
+            <div className="max-w-4xl mx-auto animate-fade-in">
+                <h2 className="text-4xl font-bold text-center text-indigo-800 mb-12 animate-slide-up">Resume</h2>
                 <ul className="space-y-10">
                     {experience.map((job, idx) => (
-                        <li key={idx} className="bg-indigo-50 p-6 rounded-xl shadow">
-                            <h3 className="text-xl font-semibold text-indigo-900">{job.role} @ {job.company}</h3>
-                            <p className="text-sm text-gray-600">{job.period} • {job.location}</p>
-                            <ul className="mt-3 list-disc list-inside text-gray-700 space-y-1">
+                        <li
+                            key={idx}
+                            className="bg-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 hover:shadow-xl animate-slide-fade"
+                        >
+                            <h3 className="text-xl font-semibold text-indigo-900 mb-2">{job.role} @ {job.company}</h3>
+                            <p className="text-sm text-gray-600 mb-4">{job.period} • {job.location}</p>
+                            <ul className="list-disc list-inside text-gray-700 space-y-2">
                                 {job.highlights.map((point, index) => (
-                                    <li key={index}>{point}</li>
+                                    <li key={index} className="text-lg">{point}</li>
                                 ))}
                             </ul>
                         </li>

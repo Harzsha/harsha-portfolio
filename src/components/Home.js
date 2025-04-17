@@ -2,7 +2,7 @@ const Home = () => {
   return (
     <div className="relative isolate px-6 pt-32 pb-20 h-screen flex items-center justify-center text-center bg-white overflow-hidden">
       {/* Background Blobs */}
-      <div className="absolute inset-x-0 top-0 -z-10 blur-3xl">
+      <div className="absolute inset-x-0 top-0 -z-10 blur-3xl animate-slide-fade">
         <div
           className="w-[72rem] h-[72rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 rotate-[30deg]"
           style={{
@@ -12,20 +12,31 @@ const Home = () => {
         ></div>
       </div>
 
-      <div className="max-w-2xl z-10">
-        <img
-          src="/harsha-logo.jpeg" // Replace with your image path in public folder
-          alt="Harshavardhan P"
-          className="w-40 h-40 rounded-full mx-auto mb-6 shadow-lg object-cover"
-        />
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">Harshavardhan P</h1>
-        <p className="text-lg text-gray-600 mb-8">
+      <div className="max-w-2xl z-10 animate-fade-in">
+        {/* Profile Picture */}
+        <div className="mb-6 flex justify-center">
+          <img
+            src="/harsha-logo.jpeg" // Replace with your image path in public folder
+            alt="Harshavardhan P"
+            className="w-40 h-40 rounded-full shadow-lg object-cover animate-slide-up"
+          />
+        </div>
+
+        {/* Name */}
+        <h1 className="text-5xl font-bold text-gray-900 mb-4 animate-slide-up animate-delay-100">
+          Harshavardhan P
+        </h1>
+
+        {/* Description */}
+        <p className="text-lg text-gray-600 mb-8 mx-auto max-w-2xl animate-slide-up animate-delay-200">
           Full Stack Developer | Expert in Angular, React, RxJS, and CI/CD. Crafting pixel-perfect UI & scalable code.
         </p>
-        <div className="flex justify-center items-center gap-6">
+
+        {/* Buttons */}
+        <div className="flex justify-center items-center gap-6 animate-slide-up animate-delay-300">
           <a
             href="#about"
-            className="bg-indigo-600 text-white px-5 py-3 rounded-md text-sm font-medium hover:bg-indigo-500"
+            className="bg-indigo-600 text-white px-5 py-3 rounded-md text-sm font-medium hover:bg-indigo-500 transition duration-300 ease-in-out transform hover:scale-105"
           >
             About
           </a>
@@ -33,7 +44,7 @@ const Home = () => {
             href="/HarshaP_Resume.pdf" // Replace with actual path to your PDF
             download
             rel="noopener noreferrer"
-            className="text-sm font-semibold text-gray-900 hover:underline"
+            className="text-sm font-semibold text-gray-900 hover:underline transition duration-300 ease-in-out transform hover:scale-105"
           >
             Download Resume →
           </a>

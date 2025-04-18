@@ -2,19 +2,33 @@ import React, { useState, useEffect } from "react";
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [flipped, setFlipped] = useState(false);
+  const images = ["/harsha-logo.jpeg", "/harsha.jpeg"];
+  const [selectedImage, setSelectedImage] = useState(images[0]);
+  const [alternateImage, setAlternateImage] = useState(images[1]);
+  const [spinOnce, setSpinOnce] = useState(true); // Control spin
 
-  // Handle scroll event to show/hide the button
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setIsVisible(true); // Show button if scrolled down 200px
-      } else {
-        setIsVisible(false); // Hide button if at the top
-      }
+      setIsVisible(window.scrollY > 200);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Random avatar on load
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const otherIndex = randomIndex === 0 ? 1 : 0;
+    setSelectedImage(images[randomIndex]);
+    setAlternateImage(images[otherIndex]);
+
+    // Stop spin after 3 seconds
+    const timeout = setTimeout(() => {
+      setSpinOnce(false);
+    }, 3000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   const scrollToTop = () => {
@@ -23,7 +37,7 @@ const Home = () => {
 
   return (
     <div className="relative isolate px-6 pt-32 pb-20 h-screen flex items-center justify-center text-center bg-white overflow-hidden">
-      {/* Background Blobs */}
+      {/* Background Blob */}
       <div className="absolute inset-x-0 top-0 -z-10 blur-3xl animate-slide-fade">
         <div
           className="w-[72rem] h-[72rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 rotate-[30deg]"
@@ -35,13 +49,28 @@ const Home = () => {
       </div>
 
       <div className="max-w-2xl z-10 animate-fade-in">
-        {/* Profile Picture */}
+        {/* Avatar */}
         <div className="mb-6 flex justify-center">
-          <img
-            src="/harsha-logo.jpeg" // Replace with your image path in public folder
-            alt="Harshavardhan P"
-            className="w-40 h-40 rounded-full shadow-lg object-cover animate-slide-up"
-          />
+          <div
+            className="relative w-40 h-40 rounded-full cursor-pointer perspective"
+            onClick={() => setFlipped(!flipped)}
+          >
+            <div
+              className={`w-full h-full transition-transform duration-700 transform-style-preserve-3d ${flipped ? "rotate-y-180" : ""
+                } ${spinOnce ? "animate-spin-once" : ""}`}
+            >
+              <img
+                src={selectedImage}
+                alt="Front"
+                className="absolute backface-hidden w-full h-full object-cover rounded-full shadow-lg"
+              />
+              <img
+                src={alternateImage}
+                alt="Back"
+                className="absolute rotate-y-180 backface-hidden w-full h-full object-cover rounded-full shadow-lg"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Name */}
@@ -63,7 +92,7 @@ const Home = () => {
             About
           </a>
           <a
-            href="/HarshaP_Resume.pdf" // Replace with actual path to your PDF
+            href="/HarshaP_Resume.pdf"
             download
             rel="noopener noreferrer"
             className="text-sm font-semibold text-gray-900 hover:underline transition duration-300 ease-in-out transform hover:scale-105"
@@ -73,13 +102,12 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Back to Top Button */}
+      {/* Scroll to Top */}
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-10 right-10 bg-indigo-600 text-white rounded-full p-4 shadow-lg hover:bg-indigo-700 transition transform hover:scale-105 animate-bounce"
+          className="fixed bottom-10 right-10 bg-indigo-600 text-white rounded-full p-4 shadow-lg hover:bg-indigo-700 transition transform hover:scale-105 animate-bounce md:block hidden"
         >
-          {/* Arrow Up Icon */}
           <span className="text-2xl font-bold">↑</span>
         </button>
       )}

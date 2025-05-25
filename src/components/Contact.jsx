@@ -132,7 +132,7 @@ const Contact = () => {
                 {/* Resume Download */}
                 <div className="mt-8 flex justify-center">
                     <a
-                        href="/HarshaP_Resume.pdf"
+                        href="/HarshavardhanP_FullStackDeveloper.pdf"
                         download
                         className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl text-lg font-medium transition-all shadow-lg"
                     >

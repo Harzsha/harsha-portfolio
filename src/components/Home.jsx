@@ -92,7 +92,7 @@ const Home = () => {
             About
           </a>
           <a
-            href="/HarshaP_Resume.pdf"
+            href="/HarshavardhanP_FullStackDeveloper.pdf"
             download
             rel="noopener noreferrer"
             className="text-sm font-semibold text-gray-900 hover:underline transition duration-300 ease-in-out transform hover:scale-105"
